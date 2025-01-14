@@ -1,15 +1,12 @@
 {
   "name": "backend",
-  "version": "1.0.0",
-  "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "dev": "bun run --hot src/index.ts"
   },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
-  "description": "",
   "dependencies": {
-    "express": "^4.21.2"
+    "hono": "^4.6.16"
+  },
+  "devDependencies": {
+    "@types/bun": "latest"
   }
 }
