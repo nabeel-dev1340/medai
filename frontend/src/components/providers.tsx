@@ -6,7 +6,7 @@ function Providers({ children }: PropsWithChildren) {
   return (
     <ThemeProvider defaultTheme="dark" storageKey="vite-ui-theme">
       {children}
-      <Toaster />
+      <Toaster richColors />
     </ThemeProvider>
   );
 }

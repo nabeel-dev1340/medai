@@ -8,4 +8,6 @@ app.use(logger());
 
 app.basePath("/api").route("/", router);
 
+// TODO add * route to serve static frontend built directory
+
 export default app;
