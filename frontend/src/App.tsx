@@ -3,7 +3,9 @@ import { ModeToggle } from "./components/mode-toggle";
 import { Label } from "./components/ui/label";
 import { Button } from "./components/ui/button";
 import { useDropzone } from "react-dropzone";
+import { toast } from "sonner";
 
+// TODO refactor to UploadComponent
 function App() {
   const { getRootProps, getInputProps, acceptedFiles } = useDropzone();
 
@@ -19,13 +21,27 @@ function App() {
     });
     console.log("formData >>>", formData.getAll(KEY));
 
-    // fetch("/api/upload", {
-    //   method: "POST",
-    //   body: formData,
-    //   headers: {
-    //     "Content-Type": "mutlipart/form-data",
-    //   },
-    // });
+    const sendReq = async () => {
+      await new Promise((res) => setTimeout(res, 2000)); // FIXME remove artificial delay
+      const res = await fetch("/api/upload", {
+        method: "POST",
+        body: formData,
+      });
+
+      if (!res.ok) {
+        throw new Error();
+      }
+
+      return res.body;
+    };
+
+    toast.promise(sendReq(), {
+      loading: "Loading...",
+      success: (_) => {
+        return "Upload Successful!";
+      },
+      error: "Oops! something went wrong",
+    });
   };
 
   return (
