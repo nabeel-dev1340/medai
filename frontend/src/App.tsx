@@ -1,36 +1,18 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import { Button } from './components/ui/button'
-import './App.css'
+import "./App.css";
+import { ModeToggle } from "./components/mode-toggle";
+import { Label } from "./components/ui/label";
+import UploadFiles from "./components/upload-files";
 
 function App() {
-  const [count, setCount] = useState(0)
-
   return (
-    <>
-      <div>
-        <a href="https://vite.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
+    <main className="min-w-screen h-full min-h-screen w-full p-2">
+      <div className="flex w-full justify-between">
+        <Label className="text-lg">Med AI</Label>
+        <ModeToggle />
       </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <Button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </Button>
-        <p>
-          Edit <code>src/App.tsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
-  )
+      <UploadFiles />
+    </main>
+  );
 }
 
-export default App
+export default App;

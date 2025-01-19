@@ -1,13 +1,13 @@
-import { Hono } from 'hono'
+import { Hono } from "hono";
+import { logger } from "hono/logger";
+import router from "./router";
 
-const app = new Hono()
+const app = new Hono();
 
-app.get('/', (c) => {
-  return c.text('Hello Hono!')
-})
+app.use(logger());
 
-app.get('/health', (c) => {
-  return c.text('API healthy')
-})
+app.basePath("/api").route("/", router);
 
-export default app
+// TODO add * route to serve static frontend built directory
+
+export default app;
