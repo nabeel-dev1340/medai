@@ -27,6 +27,7 @@ router.post("/upload", async (c) => {
       message: "incorrect request body",
     });
   }
+  // TODO: validate accepted mimetypes server side
   console.log("output :>> ", output);
 
   // TODO create a function to check file type and run business logic

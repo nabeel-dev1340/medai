@@ -6,7 +6,17 @@ import { Label } from "./ui/label";
 export interface UploadFilesProps {}
 
 function UploadFiles() {
-  const { getRootProps, getInputProps, acceptedFiles } = useDropzone();
+  const { getRootProps, getInputProps, acceptedFiles, fileRejections } =
+    useDropzone({
+      accept: {
+        "image/jpeg": [".png", ".jpeg", ".jpg"],
+        "application/pdf": [".pdf", ".doc", ".docx"],
+      },
+    });
+
+  if (fileRejections.length !== 0) {
+    toast.error("file type not supported");
+  }
 
   // ? optimize using useCallback ?
   const submit = async () => {
@@ -18,7 +28,6 @@ function UploadFiles() {
       formData.append(KEY, file);
     });
     const sendReq = async () => {
-      await new Promise((res) => setTimeout(res, 2000)); // FIXME remove artificial delay
       const res = await fetch("/api/upload", {
         method: "POST",
         body: formData,
@@ -40,7 +49,6 @@ function UploadFiles() {
     });
   };
 
-  // TODO accept specific mimetypes
   return (
     <div className="mx-auto flex w-4/5 flex-col gap-4">
       <div
